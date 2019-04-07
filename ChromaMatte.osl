@@ -1,0 +1,18 @@
+shader ChromaMatte(
+        color Color1=0,
+        color Color2=0,
+        float threshold = 0.05 [[float min=0, float max=1]],
+        color Fill=0,
+        output color Color = 0,
+        output float Alpha = 0)
+{
+  color Difference = abs( Color1-Color2 );
+  if ( hypot(Difference[0],Difference[1],Difference[2]) > threshold ){
+      Color=0;
+      Alpha=0;
+      }
+  else{
+      Color=Fill;
+      Alpha=1;
+      }
+}

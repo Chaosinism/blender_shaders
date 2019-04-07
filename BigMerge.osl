@@ -1,0 +1,33 @@
+shader BigMerge(
+        closure color Shader1=0,
+        float Alpha1=0,
+        closure color Shader2=0,
+        float Alpha2=0,
+        closure color Shader3=0,
+        float Alpha3=0,
+        closure color Shader4=0,
+        float Alpha4=0,
+        closure color Shader5=0,
+        float Alpha5=0,
+        closure color Shader6=0,
+        float Alpha6=0,
+        closure color Shader7=0,
+        float Alpha7=0,
+        closure color Shader8=0,
+        float Alpha8=0,
+        closure color ShaderDefault=0,
+        float AlphaDefault=1,
+        output closure color Shader=0,
+        output float Alpha=1
+                )
+{
+  if (Alpha1==0 && Alpha2 ==0 && Alpha3 ==0 && Alpha4 ==0 && Alpha5 ==0 && Alpha6 ==0 && Alpha7 ==0 && Alpha8 ==0) {
+      Shader=ShaderDefault;
+      Alpha=AlphaDefault;
+      }
+  else {
+      Shader=Alpha1*Shader1+Alpha2*Shader2+Alpha3*Shader3+Alpha4*Shader4+Alpha5*Shader5+Alpha6*Shader6+Alpha7*Shader7+Alpha8*Shader8;
+      Alpha=Alpha1+Alpha2+Alpha3+Alpha4+Alpha5+Alpha6+Alpha7+Alpha8;
+      }
+  
+}

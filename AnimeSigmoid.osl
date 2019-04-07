@@ -1,0 +1,24 @@
+color sigmoid(float x, color low, color high, float threshold, float smooth) {
+    return low+(high-low)*(1.0/(1+exp((threshold-x)*smooth)));
+}
+
+shader Anime_Sigmoid(
+    float DiffFactor=1,
+    color DiffColor=0.3,
+    color DiffShadow=0.1,
+    float ShadowThres=0.3,
+    color DiffLight=0.5,
+    float LightThres=0.7,
+    float DiffSmooth=1,
+    float SpecFactor=0.2,
+    color SpecColor=0.1,
+    float SpecSize=0.1,
+    float SpecSmooth=0.2,
+    normal Normal=N,
+    output closure color BSDF = diffuse(N))
+{
+    color Colorset[8]={0,0,0,0,0,0,0,0};
+    for (int i=0;i<4;i++) Colorset[i]=sigmoid(i*0.143, DiffFactor*DiffShadow+(1-DiffFactor)*DiffColor, DiffColor, ShadowThres, DiffSmooth) ;
+    for (int i=4;i<8;i++) Colorset[i]=sigmoid(i*0.143, DiffColor, DiffFactor*DiffLight+(1-DiffFactor)*DiffColor, LightThres, DiffSmooth) ;
+    BSDF = diffuse_ramp(Normal,Colorset) + SpecFactor*SpecColor*glossy_toon(Normal, SpecSize, SpecSmooth);
+}

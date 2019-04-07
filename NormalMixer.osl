@@ -1,0 +1,11 @@
+shader Normal_Mixer(
+        normal Normal1=N,
+        normal Normal2=0,
+        float Weight=1,
+        output normal Normal=N)
+{ 
+  Normal[0]=Normal1[0]+Normal2[0]*Weight;
+  Normal[1]=Normal1[1]+Normal2[1]*Weight;
+  Normal[2]=Normal1[2];
+  Normal=normalize(Normal);
+}

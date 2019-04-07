@@ -1,0 +1,9 @@
+shader UV_Dumping(
+        normal Normal=N,
+        point Point=P,
+        float MaxDistortion=2,
+        output point DumpedPoint=P)
+{ 
+  DumpedPoint[0]=Point[0]*sqrt(1+pow(min(abs(Normal[0]/Normal[2]),MaxDistortion),2));
+  DumpedPoint[1]=Point[1]*sqrt(1+pow(min(abs(Normal[1]/Normal[2]),MaxDistortion),2));
+}
